@@ -1,13 +1,121 @@
-:root{--bg:#fff8ec;--ink:#1f2a44;--accent:#ffb400;--muted:#5b6478}
+/* The game's own look (Summer Pop kit): ink outlines, a solid drop shadow instead of a blur,
+   sand, sun yellow, coral, sea blue, mint. Fonts are the game's: Lilita One and Rubik (OFL, /assets/fonts). */
+@font-face{font-family:"Lilita One";src:url(/assets/fonts/LilitaOne-Regular.ttf) format("truetype");font-display:swap}
+@font-face{font-family:"Rubik";src:url(/assets/fonts/Rubik-Medium.ttf) format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:"Rubik";src:url(/assets/fonts/Rubik-Bold.ttf) format("truetype");font-weight:700;font-display:swap}
+
+:root{
+  --ink:#23202e;--sand:#fff1d6;--yellow:#ffd23f;--coral:#ff8765;
+  --blue:#2666bb;--sea:#3fb6e8;--mint:#86e3cc;--white:#fffaf0;
+  --shadow:6px 6px 0 var(--ink);--line:3px solid var(--ink);
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:760px;margin:0 auto;padding:48px 20px 80px}
-h1{font-size:2rem;line-height:1.2;margin:0 0 8px}
-h2{font-size:1.25rem;margin:36px 0 8px}
-a{color:#b36b00}
-.muted{color:var(--muted)}
-.brand{display:inline-block;background:var(--accent);color:var(--ink);font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:24px;text-decoration:none}
-table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0}
-th,td{border:1px solid #e6d9bf;padding:8px 10px;text-align:left;vertical-align:top}
-th{background:#ffefc7}
-footer{margin-top:56px;font-size:14px;color:var(--muted)}
+html{background:var(--sand)}
+html,body{overflow-x:clip}
+body{
+  margin:0;color:var(--ink);font:500 18px/1.55 Rubik,system-ui,sans-serif;
+  /* sand grain */
+  background:
+    radial-gradient(circle at 20% 30%,rgba(35,32,46,.05) 1px,transparent 1.5px) 0 0/23px 23px,
+    radial-gradient(circle at 70% 80%,rgba(35,32,46,.04) 1px,transparent 1.5px) 0 0/31px 31px,
+    var(--sand);
+}
+img{max-width:100%;display:block}
+a{color:var(--blue);font-weight:700}
+h1,h2,h3,.title{font-family:"Lilita One",Rubik,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.05;margin:0}
+
+/* ── hero ─────────────────────────────────────────── */
+.hero{position:relative;min-height:min(92vh,980px);overflow:hidden;display:flex;align-items:center;border-bottom:var(--line)}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(35,32,46,.45) 0%,rgba(35,32,46,.12) 50%,rgba(35,32,46,0) 70%)}
+.hero-inner{position:relative;z-index:1;width:min(1200px,100%);margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:minmax(220px,430px) minmax(0,1fr);gap:40px;align-items:center}
+.hero-logo{width:100%;height:auto;filter:drop-shadow(0 10px 0 rgba(35,32,46,.35));animation:bob 5s ease-in-out infinite}
+.hero-copy{color:var(--white);position:relative}
+.hero-copy::before{content:"";position:absolute;inset:-60px -80px;z-index:-1;background:radial-gradient(closest-side,rgba(35,32,46,.5),rgba(35,32,46,0));pointer-events:none}
+.hero-copy h1{font-size:clamp(40px,5.6vw,76px);text-shadow:4px 4px 0 var(--ink);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;margin:18px 0 16px;max-width:12ch}
+.lead{font-size:clamp(18px,1.6vw,22px);max-width:34ch;text-shadow:2px 2px 0 var(--ink);font-weight:700}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-1deg)}}
+
+.sticker{display:inline-block;margin:0;padding:10px 18px;font:400 22px/1 "Lilita One",sans-serif;border:var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.sticker-yellow{background:var(--yellow);color:var(--ink)}
+.tilt-l{transform:rotate(-2.2deg)}
+.tilt-r{transform:rotate(1.8deg)}
+
+.scoreboard{position:absolute;z-index:1;right:24px;bottom:24px;background:var(--white);border:var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px 18px 4px;text-align:center}
+.scoreboard span{display:block;background:var(--blue);color:var(--white);font:700 12px/1.8 Rubik,sans-serif;border-radius:8px;padding:0 10px;letter-spacing:.06em}
+.scoreboard b{font:400 46px/1.1 "Lilita One",sans-serif}
+
+/* a strip of net between the hero and the page */
+.net{height:30px;border-bottom:var(--line);background:
+  repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 16px),
+  repeating-linear-gradient(0deg,var(--ink) 0 2px,transparent 2px 15px),var(--white);opacity:.9}
+
+/* ── sections ─────────────────────────────────────── */
+main{width:min(1200px,100%);margin:0 auto;padding:0 24px}
+section{padding:88px 0 0}
+.title{font-size:clamp(34px,4vw,54px);text-shadow:3px 3px 0 var(--yellow)}
+.intro{max-width:60ch;font-size:20px;margin:14px 0 0}
+
+.cards{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px}
+.card{background:var(--white);border:var(--line);border-radius:18px;box-shadow:var(--shadow);padding:20px 18px 22px;transition:transform .15s}
+.card:nth-child(2){background:#e5f6ff}.card:nth-child(4){background:#fff3c9}
+.card img{width:64px;height:64px}
+.card h3{font-size:30px;margin:10px 0 6px}
+.card p{margin:0;font-size:16px}
+.card:hover{transform:rotate(0) translateY(-4px)}
+
+.tour{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.tour p{font-size:20px;margin:16px 0 0}
+.tiers{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-wrap:wrap;gap:14px}
+.ticket{font:400 22px/1 "Lilita One",sans-serif;padding:12px 20px 12px 26px;border:var(--line);border-radius:10px;box-shadow:4px 4px 0 var(--ink);position:relative}
+.ticket::before{content:"";position:absolute;left:8px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--ink);opacity:.8}
+.t-chall{background:var(--mint)}.t-pro{background:var(--sea)}.t-elite{background:var(--coral)}.t-finals{background:var(--yellow)}
+
+.photo{margin:0;background:var(--white);border:var(--line);border-radius:6px;box-shadow:var(--shadow);padding:12px 12px 0}
+.photo img{border:2px solid var(--ink);border-radius:2px;aspect-ratio:16/9;object-fit:cover;width:100%}
+.photo figcaption{font:400 24px/1 "Lilita One",sans-serif;padding:12px 4px 14px}
+
+.strip{margin:36px -24px 0;padding:10px 24px 30px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(320px,30%);gap:28px;overflow-x:auto;scroll-snap-type:x mandatory}
+.strip .photo{scroll-snap-align:start}
+
+.chips{list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.chips li{display:flex;align-items:center;gap:14px;background:var(--white);border:var(--line);border-radius:999px;box-shadow:4px 4px 0 var(--ink);padding:10px 22px 10px 12px;font-weight:700}
+.chips img{width:44px;height:44px;flex:none}
+
+.studio{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:center;padding-bottom:88px}
+.studio p{font-size:20px;margin:14px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.button{display:inline-block;overflow-wrap:anywhere;max-width:100%;background:var(--yellow);color:var(--ink);text-decoration:none;border:var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--ink);padding:10px 16px}
+.button:active{transform:translate(4px,4px);box-shadow:none}
+
+.foot{border-top:var(--line);background:var(--ink);color:var(--sand);text-align:center;font-size:14px;padding:22px 16px}
+
+/* ── narrow screens ───────────────────────────────── */
+@media (max-width:980px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tour{grid-template-columns:minmax(0,1fr)}
+  .chips{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .hero-inner{grid-template-columns:minmax(0,1fr);padding-top:28px}
+  .hero-logo{width:min(320px,80%)}
+  .hero::after{background:linear-gradient(0deg,rgba(35,32,46,.7) 0%,rgba(35,32,46,.2) 60%)}
+  .scoreboard{display:none}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .strip{grid-auto-columns:82%}
+  .studio{grid-template-columns:minmax(0,1fr)}
+  .studio-logo{width:220px}
+  section{padding-top:64px}
+}
+@media (prefers-reduced-motion:reduce){.hero-logo{animation:none}}
+
+/* ── documents (privacy) ──────────────────────────── */
+main.doc{max-width:780px;padding:40px 24px 80px}
+main.doc h1{font-size:clamp(32px,4vw,46px);margin:18px 0 8px}
+main.doc h2{font-size:28px;margin:40px 0 8px}
+.brand{display:inline-block;background:var(--yellow);color:var(--ink);font:400 20px/1 "Lilita One",sans-serif;padding:8px 14px;border:var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--ink);text-decoration:none}
+.muted{color:#6b6475}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0;background:var(--white)}
+th,td{border:2px solid var(--ink);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--yellow)}
+main.doc footer{margin-top:56px;font-size:14px;color:#6b6475}
