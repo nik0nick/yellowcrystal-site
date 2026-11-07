@@ -82,6 +82,7 @@ section{padding:88px 0 0}
 .chips li{display:flex;align-items:center;gap:14px;background:var(--white);border:var(--line);border-radius:999px;box-shadow:4px 4px 0 var(--ink);padding:10px 22px 10px 12px;font-weight:700}
 .chips img{width:44px;height:44px;flex:none}
 
+.studio-logo{width:100%;height:auto}
 .studio{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:center;padding-bottom:88px}
 .studio p{font-size:20px;margin:14px 0 0}
 .links{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
